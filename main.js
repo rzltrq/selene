@@ -1,10 +1,17 @@
 const slides = document.querySelectorAll('.slide');
+const startButton = document.getElementById('start-button');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
 
 let currentSlide = 0;
-const fireworksCtx = fireworksCanvas.getContext('2d');
+const fireworksCtx = fireworksCanvas.getContext('3d');
+
+startButton.addEventListener('click', () => {
+    startButton.style.display = 'none';
+    audio.play();
+    showSlide();
+});
 
 // Start slides and animations
 function startSlides() {
