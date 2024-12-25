@@ -13,10 +13,13 @@ fireworksCanvas.height = window.innerHeight;
 // Locking Mechanism
 function isBirthday() {
     if (today < birthdayDate) {
-        const daysLeft = Math.ceil((birthdayDate - today) / (1000 * 60 * 60 * 24));
+        const millisecondsLeft = birthdayDate - today;
+        const daysLeft = Math.floor(millisecondsLeft / (1000 * 60 * 60 * 24)); // Full days left
+        const hoursLeft = Math.floor((millisecondsLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Remaining hours
+
         document.body.innerHTML = `<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(120deg, #ff9a9e, #fad0c4); color: white; text-align: center; font-family: Arial, sans-serif;">
             <h1>🎉 It's Not Time Yet! 🎉</h1>
-            <p>Come back in <strong>${daysLeft}</strong> day${daysLeft > 1 ? 's' : ''} to celebrate her birthday!</p>
+            <p>Come back in <strong>${daysLeft}</strong> day${daysLeft !== 1 ? 's' : ''} and <strong>${hoursLeft}</strong> hour${hoursLeft !== 1 ? 's' : ''} to celebrate her birthday!</p>
             </div>`;
         return false;
     }
