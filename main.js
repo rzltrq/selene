@@ -32,11 +32,12 @@ function showSlide() {
         slides[currentSlide].classList.add('active');
         currentSlide++;
         setTimeout(showSlide, 4000); // Switch slides every 4 seconds
-    }
-    else {
-        currentSlide = 0; // Reset for replay
+    } else {
+        // Do nothing; keep the last slide active
+        slides[currentSlide - 1].classList.add('active'); // Ensure the last slide remains visible
     }
 }
+
 
 
 // Replay slides functionality
