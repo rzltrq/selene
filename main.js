@@ -1,36 +1,36 @@
-// Wait for the DOM to fully load before adding the event listener
-document.addEventListener("DOMContentLoaded", function() {
-    const slides = document.querySelectorAll('.slide');
+// Event listener for Start Button
+window.addEventListener('load', () => {
+    // Selecting the start button and slides container
     const startButton = document.getElementById('start-button');
     const replayButton = document.querySelector('.replay-button');
-    const balloonsContainer = document.getElementById('balloons');
-    const fireworksCanvas = document.getElementById('fireworks');
+    const slides = document.querySelectorAll('.slide');
     const audio = document.getElementById('bgMusic');
 
     let currentSlide = 0;
-    const fireworksCtx = fireworksCanvas.getContext('2d');
 
-    // Add an event listener to the start button
-    startButton.addEventListener('click', () => {
-        console.log('Start button clicked');
-        startButton.style.display = 'none';  // Hide the start button after clicked
-        startSlides();                      // Call the function to start animations
-        audio.play();                        // Play background music
-        generateBalloons();                  // Start generating balloons
-        launchFireworks();                   // Start fireworks animation
-    });
+    // Ensure the start button is correctly found and has the event listener attached
+    if (startButton) {
+        console.log('Start Button is loaded!');
+        startButton.addEventListener('click', () => {
+            console.log('Start button clicked');
+            startButton.style.display = 'none';  // Hide the start button after clicked
+            startSlides();                      // Call the function to start animations
+            audio.play();                        // Play background music
+            generateBalloons();                  // Start generating balloons
+            launchFireworks();                   // Start fireworks animation
+        });
+    } else {
+        console.error("Start button not found.");
+    }
 
-    // Replay the slideshow
-    replayButton.addEventListener('click', () => {
-        replaySlides();
-    });
-
+    // Function to show slides
     function startSlides() {
         showSlide();
         generateBalloons();
         launchFireworks();
     }
 
+    // Slide switching logic
     function showSlide() {
         if (currentSlide > 0) {
             slides[currentSlide - 1].classList.remove('active');
@@ -45,13 +45,18 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Replay slides functionality
+    replayButton.addEventListener('click', () => {
+        replaySlides();
+    });
+
     function replaySlides() {
         slides.forEach(slide => slide.classList.remove('active'));
         currentSlide = 0;
-        startSlides(); // Start again from the beginning
+        startSlides(); // Restart the animation
     }
 
-    // Function for creating balloons
+    // Function for generating balloons
     function generateBalloons() {
         const balloonColors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
 
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
             balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
             balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
 
-            balloonsContainer.appendChild(balloon);
+            document.getElementById('balloons').appendChild(balloon);
 
             balloon.addEventListener('animationend', () => {
                 balloon.remove();
@@ -71,25 +76,28 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         for (let i = 0; i < 10; i++) {
-            createBalloon(); // Create a few balloons to start
+            createBalloon(); // Create balloons initially
         }
 
-        setInterval(createBalloon, 1000); // Keep creating balloons every second
+        setInterval(createBalloon, 1000); // Keep generating balloons
     }
 
-    // Function to launch fireworks
+    // Fireworks animation logic
     function launchFireworks() {
+        const fireworksCanvas = document.getElementById('fireworks');
+        const fireworksCtx = fireworksCanvas.getContext('2d');
         fireworksCanvas.width = window.innerWidth;
         fireworksCanvas.height = window.innerHeight;
-        animateFireworks(); // Start animating fireworks
+        animateFireworks(fireworksCtx, fireworksCanvas);
     }
 
-    function animateFireworks() {
-        fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+    function animateFireworks(ctx, canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        // Simulate fireworks using random values for x, y, and colors
         for (let i = 0; i < 5; i++) {
-            const x = Math.random() * fireworksCanvas.width;
-            const y = Math.random() * fireworksCanvas.height / 2;
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height / 2;
             const colors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
 
             for (let j = 0; j < 50; j++) {
@@ -97,17 +105,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 const radius = Math.random() * 150;
                 const fx = x + Math.cos(angle) * radius;
                 const fy = y + Math.sin(angle) * radius;
-                const depthEffect = Math.random(); // Simulate 3D depth
+                const depthEffect = Math.random();
 
-                fireworksCtx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-                fireworksCtx.globalAlpha = depthEffect;
-                fireworksCtx.beginPath();
-                fireworksCtx.arc(fx, fy, 2 + depthEffect * 2, 0, Math.PI * 2);
-                fireworksCtx.fill();
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.globalAlpha = depthEffect;
+                ctx.beginPath();
+                ctx.arc(fx, fy, 2 + depthEffect * 2, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
 
-        requestAnimationFrame(animateFireworks); // Loop to create fireworks continuously
+        requestAnimationFrame(() => animateFireworks(ctx, canvas)); // Loop fireworks animation
     }
 
 });
