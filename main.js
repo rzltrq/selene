@@ -1,5 +1,5 @@
-// Make sure your script starts after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function () {
+// Wait for the DOM to fully load before adding the event listener
+document.addEventListener("DOMContentLoaded", function() {
     const slides = document.querySelectorAll('.slide');
     const startButton = document.getElementById('start-button');
     const replayButton = document.querySelector('.replay-button');
@@ -8,35 +8,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('bgMusic');
 
     let currentSlide = 0;
-    let balloons = [];
     const fireworksCtx = fireworksCanvas.getContext('2d');
 
-    // Check if the start button exists and log it
-    console.log('Start Button:', startButton);
-
-    // Event listener for start button
+    // Add an event listener to the start button
     startButton.addEventListener('click', () => {
-        console.log('Start button clicked!');
-        startButton.style.display = 'none';  // Hide the start button when clicked
-        startSlides();
-        audio.play();
-        generateBalloons();
-        launchFireworks();
+        console.log('Start button clicked');
+        startButton.style.display = 'none';  // Hide the start button after clicked
+        startSlides();                      // Call the function to start animations
+        audio.play();                        // Play background music
+        generateBalloons();                  // Start generating balloons
+        launchFireworks();                   // Start fireworks animation
     });
 
-    // Event listener for replay button
+    // Replay the slideshow
     replayButton.addEventListener('click', () => {
         replaySlides();
     });
 
-    // Start slides and animations
     function startSlides() {
         showSlide();
         generateBalloons();
         launchFireworks();
     }
 
-    // Show slides in sequence
     function showSlide() {
         if (currentSlide > 0) {
             slides[currentSlide - 1].classList.remove('active');
@@ -47,18 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
             currentSlide++;
             setTimeout(showSlide, 4000); // Switch slides every 4 seconds
         } else {
-            slides[currentSlide - 1].classList.add('active'); // Keep last slide active
+            slides[currentSlide - 1].classList.add('active'); // Keep the last slide active
         }
     }
 
-    // Replay slides functionality
     function replaySlides() {
         slides.forEach(slide => slide.classList.remove('active'));
         currentSlide = 0;
-        startSlides();
+        startSlides(); // Start again from the beginning
     }
 
-    // Balloon creation logic
+    // Function for creating balloons
     function generateBalloons() {
         const balloonColors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
 
@@ -77,29 +70,28 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Spawn first batch of balloons
         for (let i = 0; i < 10; i++) {
-            createBalloon();
+            createBalloon(); // Create a few balloons to start
         }
 
-        setInterval(createBalloon, 1000); // Continuously spawn balloons
+        setInterval(createBalloon, 1000); // Keep creating balloons every second
     }
 
-    // Fireworks creation logic
+    // Function to launch fireworks
     function launchFireworks() {
         fireworksCanvas.width = window.innerWidth;
         fireworksCanvas.height = window.innerHeight;
-        animateFireworks();
+        animateFireworks(); // Start animating fireworks
     }
 
     function animateFireworks() {
         fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
-        // Simulate fireworks with 3D effects
         for (let i = 0; i < 5; i++) {
             const x = Math.random() * fireworksCanvas.width;
             const y = Math.random() * fireworksCanvas.height / 2;
             const colors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
+
             for (let j = 0; j < 50; j++) {
                 const angle = (Math.PI * 2 / 50) * j;
                 const radius = Math.random() * 150;
@@ -115,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        requestAnimationFrame(animateFireworks); // Loop fireworks animation
+        requestAnimationFrame(animateFireworks); // Loop to create fireworks continuously
     }
-})
 
+});
