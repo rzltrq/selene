@@ -12,6 +12,7 @@ const fireworksCtx = fireworksCanvas.getContext('2d');
 startButton.addEventListener('onclick', () => {
     startButton.style.display = 'none';
     startSlides();
+    showSlide();
     audio.play();
     generateBalloons();
     launchFireworks();
