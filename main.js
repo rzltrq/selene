@@ -32,7 +32,7 @@ function showSlide() {
         currentSlide++;
         setTimeout(showSlide, 4000); // Switch slides every 4 seconds
     }
-    if (currentSlide = slides.length) {
+    elif (currentSlide = slides.length) {
         stopSlide;
     }
     else {
