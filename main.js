@@ -117,4 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         requestAnimationFrame(animateFireworks); // Loop fireworks animation
     }
-});
+})
+
+startSlides();
