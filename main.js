@@ -43,11 +43,10 @@ function showSlide() {
     }
 }
 
-function stopSlides(){
+function stopingSlides(){
     slides[currentSlide].classList.add('active');
+    stopSlides();
 }
-    
-
 
 // Replay slides functionality
 function replaySlides() {
