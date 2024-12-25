@@ -15,7 +15,6 @@ function startSlides() {
     launchFireworks();
 };
 
-}
 
 // Show slides in sequence
 function showSlide() {
