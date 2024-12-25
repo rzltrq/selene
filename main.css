@@ -75,7 +75,7 @@ body {
 }
 
 .balloons {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -90,7 +90,7 @@ body {
     height: 70px;
     background: radial-gradient(circle, #ff6f61 40%, rgba(255, 255, 255, 0.8) 100%);
     border-radius: 50% 50%;
-    bottom: -100px; /* Start far below the screen */
+    bottom: 0px; /* Start far below the screen */
     animation: float 10s linear infinite, sway 4s ease-in-out infinite;
     z-index: 10;
     will-change: transform, opacity;
