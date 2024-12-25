@@ -1,131 +1,31 @@
+// Main functionality updates for birthday celebration
 const slides = document.querySelectorAll('.slide');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
 
 let currentSlide = 0;
-let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
+fireworksCanvas.width = window.innerWidth;
+fireworksCanvas.height = window.innerHeight;
 
-
-function startSlides() {
-    showSlide();
-    audio.play();
-    generateBalloons();
-    launchFireworks();
-    launchConfetti();
-};
-
-function replaySlide() {
-    showSlide();
-    generateBalloons();
-    launchFireworks();
-    launchConfetti();
-};
-
-
-// Show slides in sequence
-function showSlide() {
-    if (currentSlide > 0) {
-        slides[currentSlide - 1].classList.remove('active');
-    }
-
-    if (currentSlide < slides.length) {
-        slides[currentSlide].classList.add('active');
-        currentSlide++;
-        setTimeout(showSlide, 4000); // Switch slides every 4 seconds
-    } else {
-        slides[currentSlide - 1].classList.add('active'); // Keep last slide active
-    }
-}
-
-// Replay slides functionality
-function replaySlides() {
-    slides.forEach(slide => slide.classList.remove('active'));
-    currentSlide = 0;
-    replaySlide();
-}
-
-// Balloons generation
-function generateBalloons() {
-    const balloonColors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
-
-    function createBalloon() {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon';
-
-        balloon.style.left = `${Math.random() * 90}%`;
-        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
-        balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
-
-        balloonsContainer.appendChild(balloon);
-
-        balloon.addEventListener('animationend', () => {
-            balloon.remove();
-        });
-    }
-
-    // Spawn first batch of balloons
-    for (let i = 0; i < 10; i++) {
-        createBalloon();
-    }
-    
-    setInterval(createBalloon, 1000); // Continuously spawn balloons
-
-}
-
-    generateBalloons(); // Start generating balloons
-
-
-// Fireworks simulation
-function launchFireworks() {
-    fireworksCanvas.width = window.innerWidth;
-    fireworksCanvas.height = window.innerHeight;
-    animateFireworks();
-}
-
-function animateFireworks() {
-    fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-
-    // Simulate fireworks with 3D effects
-    for (let i = 0; i < 5; i++) {
-        const x = Math.random() * fireworksCanvas.width;
-        const y = Math.random() * fireworksCanvas.height / 2;
-        const colors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
-        for (let j = 0; j < 50; j++) {
-            const angle = (Math.PI * 2 / 50) * j;
-            const radius = Math.random() * 150;
-            const fx = x + Math.cos(angle) * radius;
-            const fy = y + Math.sin(angle) * radius;
-            const depthEffect = Math.random(); // Simulate 3D depth
-
-            fireworksCtx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-            fireworksCtx.globalAlpha = depthEffect;
-            fireworksCtx.beginPath();
-            fireworksCtx.arc(fx, fy, 2 + depthEffect * 2, 0, Math.PI * 2);
-            fireworksCtx.fill();
-        }
-    }
-
-    requestAnimationFrame(animateFireworks); // Loop fireworks animation
-}
-
+// Confetti Library Setup
 function launchConfetti() {
-    const duration = 3 * 1000; // Confetti for 3 seconds
+    const duration = 3000; // 3 seconds
     const end = Date.now() + duration;
 
     (function frame() {
         confetti({
-            particleCount: 5,
+            particleCount: 10,
             angle: 60,
             spread: 55,
-            origin: { x: 0 }
+            origin: { x: 0 },
         });
         confetti({
-            particleCount: 5,
+            particleCount: 10,
             angle: 120,
             spread: 55,
-            origin: { x: 1 }
+            origin: { x: 1 },
         });
 
         if (Date.now() < end) {
@@ -133,3 +33,121 @@ function launchConfetti() {
         }
     })();
 }
+
+// Fireworks Animation
+function animateFireworks() {
+    fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+
+    for (let i = 0; i < 5; i++) {
+        const x = Math.random() * fireworksCanvas.width;
+        const y = Math.random() * fireworksCanvas.height / 2;
+        const colors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
+
+        for (let j = 0; j < 50; j++) {
+            const angle = (Math.PI * 2 / 50) * j;
+            const radius = Math.random() * 150;
+            const fx = x + Math.cos(angle) * radius;
+            const fy = y + Math.sin(angle) * radius;
+
+            const gradient = fireworksCtx.createRadialGradient(fx, fy, 0, fx, fy, radius / 2);
+            gradient.addColorStop(0, colors[Math.floor(Math.random() * colors.length)]);
+            gradient.addColorStop(1, 'transparent');
+
+            fireworksCtx.fillStyle = gradient;
+            fireworksCtx.beginPath();
+            fireworksCtx.arc(fx, fy, 2 + Math.random() * 2, 0, Math.PI * 2);
+            fireworksCtx.fill();
+        }
+    }
+
+    requestAnimationFrame(animateFireworks);
+}
+
+// Cursor Particle Effect
+function addCursorParticles() {
+    document.addEventListener('mousemove', (event) => {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.top = `${event.clientY}px`;
+        particle.style.left = `${event.clientX}px`;
+        particle.style.width = '5px';
+        particle.style.height = '5px';
+        particle.style.borderRadius = '50%';
+        particle.style.backgroundColor = `rgba(255, 255, 255, ${Math.random()})`;
+        particle.style.pointerEvents = 'none';
+        particle.style.animation = 'particleFade 1s forwards';
+
+        document.body.appendChild(particle);
+        particle.addEventListener('animationend', () => particle.remove());
+    });
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes particleFade {
+            to {
+                transform: translateY(-30px) scale(0);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Balloons Animation
+function generateBalloons() {
+    const balloonColors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
+
+    function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = `${Math.random() * 90}%`;
+        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
+        balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
+        balloonsContainer.appendChild(balloon);
+
+        balloon.addEventListener('animationend', () => balloon.remove());
+    }
+
+    // Continuously spawn balloons
+    setInterval(createBalloon, 1000);
+}
+
+// Show Slides in Sequence
+function showSlide() {
+    if (currentSlide > 0) slides[currentSlide - 1].classList.remove('active');
+    if (currentSlide < slides.length) {
+        slides[currentSlide].classList.add('active');
+        currentSlide++;
+        setTimeout(showSlide, 4000);
+    } else {
+        slides[currentSlide - 1].classList.add('active'); // Keep last slide active
+    }
+}
+
+function startSlides() {
+    showSlide();
+    audio.play();
+    generateBalloons();
+    animateFireworks();
+    launchConfetti();
+    addCursorParticles();
+}
+
+function replaySlide() {
+    showSlide();
+    generateBalloons();
+    animateFireworks();
+    launchConfetti();
+    addCursorParticles();
+}
+
+function replaySlides() {
+    slides.forEach((slide) => slide.classList.remove('active'));
+    currentSlide = 0;
+    replaySlide();
+}
+
+// Initialize on Load
+document.addEventListener('DOMContentLoaded', () => {
+    addCursorParticles();
+});
