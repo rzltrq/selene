@@ -53,8 +53,8 @@ function generateBalloons() {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
         balloon.style.left = `${Math.random() * 100}%`;
-        balloon.style.animationDuration = `${4 + Math.random() * 6}s`;
-        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0) 100%)`;
+        balloon.style.animationDuration = `${8 + Math.random() * 4}s`; // Randomize float duration
+        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
         balloonsContainer.appendChild(balloon);
 
         // Remove balloon after animation ends
@@ -66,14 +66,15 @@ function generateBalloons() {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
         balloon.style.left = `${Math.random() * 100}%`;
-        balloon.style.animationDuration = `${4 + Math.random() * 6}s`;
-        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0) 100%)`;
+        balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
+        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
         balloonsContainer.appendChild(balloon);
 
         // Remove balloon after animation ends
         balloon.addEventListener('animationend', () => balloon.remove());
     }, 1000);
 }
+
 
 function launchFireworks() {
     fireworksCanvas.width = window.innerWidth;
