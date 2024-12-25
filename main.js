@@ -31,7 +31,7 @@ function isBirthday() {
             <p>Balik lagi ntar setelah <strong>${daysLeft}</strong> day${daysLeft !== 1 ? 's' : ''}, 
             <strong>${hoursLeft}</strong> hour${hoursLeft !== 1 ? 's' : ''}, 
             <strong>${minutesLeft}</strong> minute${minutesLeft !== 1 ? 's' : ''}, and 
-            <strong>${secondsLeft}</strong> second${secondsLeft !== 1 ? 's' : ''} to celebrate her birthday!</p>
+            <strong>${secondsLeft}</strong> second${secondsLeft !== 1 ? 's' : ''} bwt liat enih greeting card</p>
         </div>`;
         return false;
     }
