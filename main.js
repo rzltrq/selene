@@ -131,3 +131,4 @@ function animateFireworks() {
 
 
 // Start the show
+startSlides();
