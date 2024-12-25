@@ -9,7 +9,7 @@ let currentSlide = 0;
 let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
 
-startButton.addEventListener('onclick', () => {
+startButton.addEventListener('click', () => {
     startButton.style.display = 'none';
     startSlides();
     showSlide();
@@ -18,7 +18,7 @@ startButton.addEventListener('onclick', () => {
     launchFireworks();
 });
 
-replayButton.addEventListener('onclick', () => {
+replayButton.addEventListener('click', () => {
     replayButton.style.display = 'none';
     replaySlides();
 });
