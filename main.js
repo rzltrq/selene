@@ -1,27 +1,10 @@
 const slides = document.querySelectorAll('.slide');
-const startButton = document.getElementById('start-button');
-const replayButton = document.getElementById('replay-button');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
 
 let currentSlide = 0;
-let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
-
-startButton.addEventListener('click', () => {
-    startButton.style.display = 'none';
-    startSlides();
-    showSlide();
-    audio.play();
-    generateBalloons();
-    launchFireworks();
-});
-
-replayButton.addEventListener('click', () => {
-    replayButton.style.display = 'none';
-    replaySlides();
-});
 
 // Start slides and animations
 function startSlides() {
@@ -30,7 +13,6 @@ function startSlides() {
     generateBalloons();
     launchFireworks();
 }
-
 
 function showSlide() {
     if (currentSlide > 0) {
@@ -42,11 +24,9 @@ function showSlide() {
         currentSlide++;
         setTimeout(showSlide, 4000); // Switch slides every 4 seconds
     } else {
-        // Do nothing; keep the last slide active
-        slides[currentSlide - 1].classList.add('active'); // Ensure the last slide remains visible
+        currentSlide = 0; // Reset for replay
     }
 }
-
 
 // Replay slides functionality
 function replaySlides() {
@@ -55,48 +35,33 @@ function replaySlides() {
     startSlides();
 }
 
+// Generate random balloons
 function generateBalloons() {
-    const balloonsContainer = document.getElementById('balloons');
-    const balloonColors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
-
-    function createBalloon() {
+    for (let i = 0; i < 20; i++) {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
-
-        // Set randomized horizontal positioning
-        balloon.style.left = ${Math.random() * 90}%;
-
-        // Set random color
-        balloon.style.background = radial-gradient(circle, ${
-            balloonColors[Math.floor(Math.random() * balloonColors.length)]
-        } 40%, rgba(255, 255, 255, 0.8) 100%);
-
-        // Set random animation duration to vary speeds
-        balloon.style.animationDuration = ${8 + Math.random() * 4}s;
-
+        balloon.style.left = `${Math.random() * 100}%`;
+        balloon.style.animationDuration = `${4 + Math.random() * 6}s`;
         balloonsContainer.appendChild(balloon);
 
-        // Remove balloons when animation is complete
-        balloon.addEventListener('animationend', () => {
-            balloon.remove();
-        });
+        // Remove balloon after animation ends
+        balloon.addEventListener('animationend', () => balloon.remove());
     }
 
-    // Spawn the first balloons
-    for (let i = 0; i < 10; i++) {
-        createBalloon();
-    }
+    // Continue adding balloons periodically
+    setInterval(() => {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = `${Math.random() * 100}%`;
+        balloon.style.animationDuration = `${4 + Math.random() * 6}s`;
+        balloonsContainer.appendChild(balloon);
 
-    // Continuously spawn balloons every second
-    setInterval(createBalloon, 1000);
+        // Remove balloon after animation ends
+        balloon.addEventListener('animationend', () => balloon.remove());
+    }, 1000);
 }
 
-// Start generating balloons
-generateBalloons();
-
-
-
-
+// Fireworks animation
 function launchFireworks() {
     fireworksCanvas.width = window.innerWidth;
     fireworksCanvas.height = window.innerHeight;
@@ -106,22 +71,20 @@ function launchFireworks() {
 function animateFireworks() {
     fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
-    // Simulate fireworks with 3D effects
     for (let i = 0; i < 5; i++) {
         const x = Math.random() * fireworksCanvas.width;
         const y = Math.random() * fireworksCanvas.height / 2;
-        const colors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
-        for (let j = 0; j < 50; j++) {
-            const angle = (Math.PI * 2 / 50) * j;
-            const radius = Math.random() * 150;
+        const colors = ['#ff6f61', '#ff9a9e', '#fad0c4', '#ffe29e'];
+
+        for (let j = 0; j < 30; j++) {
+            const angle = (Math.PI * 2 / 30) * j;
+            const radius = Math.random() * 80;
             const fx = x + Math.cos(angle) * radius;
             const fy = y + Math.sin(angle) * radius;
-            const depthEffect = Math.random(); // Simulate 3D depth
 
             fireworksCtx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-            fireworksCtx.globalAlpha = depthEffect; // Vary brightness
             fireworksCtx.beginPath();
-            fireworksCtx.arc(fx, fy, 2 + depthEffect * 2, 0, Math.PI * 2); // Vary particle size
+            fireworksCtx.arc(fx, fy, 2, 0, Math.PI * 2);
             fireworksCtx.fill();
         }
     }
@@ -129,6 +92,5 @@ function animateFireworks() {
     requestAnimationFrame(animateFireworks);
 }
 
-
-// Start the show
+// Start the slideshow and effects
 startSlides();
