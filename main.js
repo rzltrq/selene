@@ -36,10 +36,6 @@ function showSlide() {
     }
 }
 
-function stopSlides() {
-    currentSlide = 4;
-    stopSlides();
-}
 
 // Replay slides functionality
 function replaySlides() {
