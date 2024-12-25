@@ -81,7 +81,8 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: -1;
+    z-index: 2;
+    overflow: hidden;
 }
 
 .balloon {
@@ -90,22 +91,23 @@ body {
     height: 70px;
     background: radial-gradient(circle, #ff6f61 40%, #ffffff 100%);
     border-radius: 50% 50% 50% 50%;
-    animation: float 8s ease-in-out infinite, sway 3s ease-in-out infinite;
+    bottom: -100px; /* Start below the screen */
+    animation: float 8s ease-in-out infinite, sway 4s ease-in-out infinite;
     z-index: 10;
-    bottom: -80px; /* Start balloons completely off the screen */
+    will-change: transform, opacity;
 }
 
 @keyframes float {
     0% {
-        transform: translateY(100%);
-        opacity: 0; /* Balloons invisible initially */
+        transform: translateY(0); /* Start from bottom */
+        opacity: 0; /* Invisible initially */
     }
-    30% {
-        opacity: 1; /* Balloons fade in smoothly */
+    10% {
+        opacity: 1; /* Fade in */
     }
     100% {
-        transform: translateY(-150%); /* Balloons rise off the screen */
-        opacity: 0; /* Balloons gradually fade as they rise off-screen */
+        transform: translateY(-150%); /* Float out of the screen */
+        opacity: 0; /* Fade out */
     }
 }
 
@@ -114,9 +116,10 @@ body {
         transform: translateX(0);
     }
     50% {
-        transform: translateX(15px); /* Sway to one side */
+        transform: translateX(20px); /* Sway left to right */
     }
 }
+
 
 
 
