@@ -22,11 +22,6 @@ function startSlides() {
     launchFireworks();
 }
 
-function stopSlides() {
-    audio.play();
-    generateBalloons();
-    launchFireworks();
-}
 
 function showSlide() {
     if (currentSlide > 0) {
@@ -39,7 +34,6 @@ function showSlide() {
         setTimeout(showSlide, 4000); // Switch slides every 4 seconds
     }
     else {
-        stopSlides();
         currentSlide = 0; // Reset for replay
     }
 }
