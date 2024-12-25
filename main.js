@@ -36,6 +36,11 @@ function showSlide() {
     }
 }
 
+function stopSlides() {
+    currentSlide = 4;
+    stopSlides();
+}
+
 // Replay slides functionality
 function replaySlides() {
     slides.forEach(slide => slide.classList.remove('active'));
