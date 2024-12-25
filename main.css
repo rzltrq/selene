@@ -40,6 +40,23 @@ body {
     border-radius: 10px;
 }
 
+.start-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #ff4e42;
+}
+
 .replay-button {
     display: inline-block;
     margin-top: 20px;
