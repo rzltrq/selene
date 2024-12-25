@@ -14,7 +14,7 @@ startButton.addEventListener('click', () => {
     audio.play();
     generateBalloons();
     launchFireworks();
-});
+})
 
 // Start slides and animations
 function startSlides() {
