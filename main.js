@@ -11,12 +11,20 @@ const fireworksCtx = fireworksCanvas.getContext('2d');
 // Event listener for start button
 startButton.addEventListener('click', () == {
     startButton.style.display = 'none'; // Hide start button after clicked
-    showSlide();
+    startSlides();
     audio.play();
     generateBalloons();
     launchFireworks();
 });
 
+function startSlides() {
+    showSlide();
+    audio.play();
+    generateBalloons();
+    launchFireworks();
+};
+
+}
 
 // Show slides in sequence
 function showSlide() {
