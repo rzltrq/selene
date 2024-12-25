@@ -1,5 +1,4 @@
 const slides = document.querySelectorAll('.slide');
-const startButton = document.getElementByID('start-button');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
@@ -8,14 +7,6 @@ let currentSlide = 0;
 let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
 
-// Event listener for start button
-startButton.addEventListener('click', () == {
-    startButton.style.display = 'none'; // Hide start button after clicked
-    startSlides();
-    audio.play();
-    generateBalloons();
-    launchFireworks();
-});
 
 function startSlides() {
     showSlide();
