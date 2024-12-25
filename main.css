@@ -40,23 +40,6 @@ body {
     border-radius: 10px;
 }
 
-.start-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ff6f61;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.start-button:hover {
-    background-color: #ff4e42;
-}
-
 .replay-button {
     display: inline-block;
     margin-top: 20px;
@@ -79,46 +62,34 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Should cover entire screen */
-    overflow: visible; /* Prevent overflow */
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
 }
-
 
 .balloon {
     position: absolute;
     width: 50px;
     height: 70px;
-    background: radial-gradient(circle, #ff6f61 40%, rgba(255, 255, 255, 0.8) 100%);
-    border-radius: 50% 50%;
-    bottom: 0px; /* Start far below the screen */
-    animation: float 10s linear infinite, sway 4s ease-in-out infinite;
+    background: radial-gradient(circle, #ff6f61 40%, #ff4e42 100%);
+    border-radius: 50% 50% 50% 50%;
+    animation: float 6s ease-in-out infinite;
     z-index: 10;
-    will-change: transform, opacity;
 }
 
 @keyframes float {
     0% {
-        transform: translateY(0); /* Start at the initial bottom position */
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    50% {
         opacity: 1;
     }
     100% {
-        transform: translateY(-150vh); /* Float off the top */
-        opacity: 0; /* Fade out */
+        transform: translateY(-150%);
+        opacity: 0;
     }
 }
-
-@keyframes sway {
-    0%, 100% {
-        transform: translateX(0); /* No horizontal movement at start/end */
-    }
-    50% {
-        transform: translateX(20px); /* Sway to the side */
-    }
-}
-
-
-
-
 
 #fireworks {
     position: absolute;
