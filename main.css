@@ -80,7 +80,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%; /* Should cover entire screen */
-    overflow: hidden; /* Prevent overflow */
+    overflow: visible; /* Prevent overflow */
 }
 
 
