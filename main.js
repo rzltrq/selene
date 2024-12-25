@@ -10,7 +10,7 @@ let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
 
 // Event listener for start button
-startButton.addEventListener('click', () => {
+startButton.addEventListener('click', {
     startButton.style.display = 'none'; // Hide start button after clicked
     showSlide();
     audio.play();
@@ -104,6 +104,5 @@ function animateFireworks() {
     requestAnimationFrame(animateFireworks); // Loop fireworks animation
 }
 // Event listener for replay button
-replayButton.addEventListener('click', () => {
-    replaySlides();
-});
+replayButton.addEventListener('click', replaySlides();
+);
