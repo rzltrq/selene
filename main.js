@@ -1,5 +1,6 @@
 const slides = document.querySelectorAll('.slide');
 const startButton = document.getElementById('start-button');
+const replayButton = document.getElementById('replay-button');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
@@ -14,6 +15,11 @@ startButton.addEventListener('click', () => {
     audio.play();
     generateBalloons();
     launchFireworks();
+});
+
+replayButton.addEventListener('click', () => {
+    replayButton.style.display = 'none';
+    replaySlides();
 });
 
 // Start slides and animations
@@ -124,4 +130,4 @@ function animateFireworks() {
 
 
 // Start the show
-startSlides();
+
