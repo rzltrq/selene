@@ -22,6 +22,12 @@ function startSlides() {
     launchFireworks();
 }
 
+function stopSlides() {
+    audio.play();
+    generateBalloons();
+    launchFireworks();
+}
+
 function showSlide() {
     if (currentSlide > 0) {
         slides[currentSlide - 1].classList.remove('active');
