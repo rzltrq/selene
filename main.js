@@ -16,6 +16,13 @@ function startSlides() {
     launchConfetti();
 };
 
+function replaySlide() {
+    showSlide();
+    generateBalloons();
+    launchFireworks();
+    launchConfetti();
+};
+
 
 // Show slides in sequence
 function showSlide() {
@@ -36,7 +43,7 @@ function showSlide() {
 function replaySlides() {
     slides.forEach(slide => slide.classList.remove('active'));
     currentSlide = 0;
-    showSlides();
+    replaySlide();
 }
 
 // Balloons generation
