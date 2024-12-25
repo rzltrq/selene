@@ -163,5 +163,5 @@ function replaySlides() {
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
-    addCursorParticles();
+    if (isBirthday()) addCursorParticles();
 });
