@@ -3,24 +3,36 @@ const slides = document.querySelectorAll('.slide');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
-const birthdayDate = new Date('2024-12-31'); // Set her birthday date (YYYY-MM-DD)
-const today = new Date();
-let currentSlide = 0;
+const birthdayDate = new Date('2024-12-31T00:00:00'); // Set her birthday date with exact time (midnight)
 const fireworksCtx = fireworksCanvas.getContext('2d');
 fireworksCanvas.width = window.innerWidth;
 fireworksCanvas.height = window.innerHeight;
+let currentSlide = 0;
+
+// Countdown Calculation
+function calculateCountdown() {
+    const today = new Date();
+    const millisecondsLeft = birthdayDate - today;
+
+    const daysLeft = Math.floor(millisecondsLeft / (1000 * 60 * 60 * 24));
+    const hoursLeft = Math.floor((millisecondsLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutesLeft = Math.floor((millisecondsLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const secondsLeft = Math.floor((millisecondsLeft % (1000 * 60)) / 1000);
+
+    return { daysLeft, hoursLeft, minutesLeft, secondsLeft };
+}
 
 // Locking Mechanism
 function isBirthday() {
-    if (today < birthdayDate) {
-        const millisecondsLeft = birthdayDate - today;
-        const daysLeft = Math.floor(millisecondsLeft / (1000 * 60 * 60 * 24)); // Full days left
-        const hoursLeft = Math.floor((millisecondsLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Remaining hours
-
+    const { daysLeft, hoursLeft, minutesLeft, secondsLeft } = calculateCountdown();
+    if (daysLeft > 0 || hoursLeft > 0 || minutesLeft > 0 || secondsLeft > 0) {
         document.body.innerHTML = `<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(120deg, #ff9a9e, #fad0c4); color: white; text-align: center; font-family: Arial, sans-serif;">
             <h1>🎉 It's Not Time Yet! 🎉</h1>
-            <p>Come back in <strong>${daysLeft}</strong> day${daysLeft !== 1 ? 's' : ''} and <strong>${hoursLeft}</strong> hour${hoursLeft !== 1 ? 's' : ''} to celebrate her birthday!</p>
-            </div>`;
+            <p>Come back in <strong>${daysLeft}</strong> day${daysLeft !== 1 ? 's' : ''}, 
+            <strong>${hoursLeft}</strong> hour${hoursLeft !== 1 ? 's' : ''}, 
+            <strong>${minutesLeft}</strong> minute${minutesLeft !== 1 ? 's' : ''}, and 
+            <strong>${secondsLeft}</strong> second${secondsLeft !== 1 ? 's' : ''} to celebrate her birthday!</p>
+        </div>`;
         return false;
     }
     return true;
