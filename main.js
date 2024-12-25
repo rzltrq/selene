@@ -1,6 +1,6 @@
 const slides = document.querySelectorAll('.slide');
-const startButton = document.querySelecctor('start-button');
-const replayButton = document.querySelector('replay-button'); // Fixed this to correctly select the replay button
+const startButton = document.getElementByID('start-button');
+const replayButton = document.getElementByID('replay-button'); // Fixed this to correctly select the replay button
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
