@@ -37,6 +37,11 @@ function showSlide() {
     }
 }
 
+function stopSlides(){
+    slides[currentSlide].classList.add('active');
+}
+    
+
 
 // Replay slides functionality
 function replaySlides() {
