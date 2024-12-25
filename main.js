@@ -36,7 +36,7 @@ function showSlide() {
 function replaySlides() {
     slides.forEach(slide => slide.classList.remove('active'));
     currentSlide = 0;
-    startSlides();
+    showSlides();
 }
 
 // Balloons generation
