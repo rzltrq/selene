@@ -88,24 +88,36 @@ body {
     position: absolute;
     width: 50px;
     height: 70px;
+    background: radial-gradient(circle, #ff6f61 40%, #ffffff 100%);
     border-radius: 50% 50% 50% 50%;
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite, sway 3s ease-in-out infinite;
     z-index: 10;
+    bottom: -80px; /* Start balloons completely off the screen */
 }
 
 @keyframes float {
     0% {
         transform: translateY(100%);
-        opacity: 0.8; /* Start with semi-transparent effect */
+        opacity: 0; /* Balloons invisible initially */
     }
-    50% {
-        opacity: 1; /* Full opacity mid-animation */
+    30% {
+        opacity: 1; /* Balloons fade in smoothly */
     }
     100% {
-        transform: translateY(-150%);
-        opacity: 0.5; /* Gradual fade-out at the top */
+        transform: translateY(-150%); /* Balloons rise off the screen */
+        opacity: 0; /* Balloons gradually fade as they rise off-screen */
     }
 }
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(15px); /* Sway to one side */
+    }
+}
+
 
 
 #fireworks {
