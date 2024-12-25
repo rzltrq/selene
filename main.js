@@ -38,12 +38,9 @@ function showSlide() {
         currentSlide++;
         setTimeout(showSlide, 4000); // Switch slides every 4 seconds
     }
-    if (currentSlide = slides.length){
-        slides[currentSlide].classList.add('active');
-        stopSlides();
-    } 
     else {
         currentSlide = 0; // Reset for replay
+        stopSlides
     }
 }
 
