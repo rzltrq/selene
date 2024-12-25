@@ -22,10 +22,18 @@ function showSlide() {
     if (currentSlide < slides.length) {
         slides[currentSlide].classList.add('active');
         currentSlide++;
-        setTimeout(showSlide, 4000); // Switch slides every 4 seconds
-    } else {
-        currentSlide = 0; // Reset for replay
+        if (currentSlide < slides.length) {
+            setTimeout(showSlide, 4000); // Switch slides every 4 seconds
+        } else {
+            // Stop after the last slide
+            stopEffects();
+        }
     }
+}
+
+function stopEffects() {
+    // Optional: Stop audio or other animations if needed
+    console.log('Slides finished!');
 }
 
 // Replay slides functionality
@@ -93,4 +101,4 @@ function animateFireworks() {
 }
 
 // Start the slideshow and effects
-startSlides();
+
