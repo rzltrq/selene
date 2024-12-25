@@ -8,11 +8,7 @@ let currentSlide = 0;
 let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
 
-startButton.addEventListener('click', () => {
-    startButton.style.display = 'start-button';
-    audio.play();
-    showSlide();
-});
+
 
 // Start slides and animations
 function startSlides() {
