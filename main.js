@@ -63,10 +63,10 @@ function generateBalloons() {
     }
 
     setInterval(createBalloon, 1000); // Continuously spawn balloons
-    generateBalloons(); // Start generating balloons
-
 
 }
+
+generateBalloons(); // Start generating balloons
 
 
 // Fireworks simulation
