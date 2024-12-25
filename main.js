@@ -1,7 +1,20 @@
 // Event listener for Start Button
 window.addEventListener('load', () => {
-    // Selecting the start button and slides container
+    // Look for the Start Button
     const startButton = document.getElementById('start-button');
+    console.log('Button Found:', startButton); // Will show "null" if not found or show the button if found
+
+    // If the start button exists, we proceed to add the event listener
+    if (startButton) {
+        console.log('Start Button is found!');
+        startButton.addEventListener('click', () => {
+            console.log('Start button clicked'); // To check if the click event works
+        });
+    } else {
+        console.error("Start button is not found!"); // If button is not found, log this
+    }
+});
+
     const replayButton = document.querySelector('.replay-button');
     const slides = document.querySelectorAll('.slide');
     const audio = document.getElementById('bgMusic');
