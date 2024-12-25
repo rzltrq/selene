@@ -48,32 +48,31 @@ function replaySlides() {
 
 function generateBalloons() {
     const balloonColors = ['#ff6f61', '#ffa500', '#87ceeb', '#ff69b4', '#6a5acd', '#32cd32'];
+    const balloonsContainer = document.getElementById('balloons');
 
-    for (let i = 0; i < 20; i++) {
+    function createBalloon() {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
-        balloon.style.left = `${Math.random() * 100}%`;
-        balloon.style.animationDuration = `${8 + Math.random() * 4}s`; // Randomize float duration
-        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
+        balloon.style.left = `${Math.random() * 90}%`; // Position balloons randomly on the x-axis
+        balloon.style.animationDuration = `${8 + Math.random() * 4}s`; // Randomize animation duration
+        balloon.style.background = `radial-gradient(circle, ${
+            balloonColors[Math.floor(Math.random() * balloonColors.length)]
+        } 40%, rgba(255, 255, 255, 0.8) 100%)`;
         balloonsContainer.appendChild(balloon);
 
         // Remove balloon after animation ends
         balloon.addEventListener('animationend', () => balloon.remove());
     }
 
-    // Continue adding balloons periodically
-    setInterval(() => {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon';
-        balloon.style.left = `${Math.random() * 100}%`;
-        balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
-        balloon.style.background = `radial-gradient(circle, ${balloonColors[Math.floor(Math.random() * balloonColors.length)]} 40%, rgba(255, 255, 255, 0.8) 100%)`;
-        balloonsContainer.appendChild(balloon);
+    // Generate an initial set of balloons
+    for (let i = 0; i < 10; i++) {
+        createBalloon();
+    }
 
-        // Remove balloon after animation ends
-        balloon.addEventListener('animationend', () => balloon.remove());
-    }, 1000);
+    // Continuously add more balloons
+    setInterval(createBalloon, 1000);
 }
+
 
 
 function launchFireworks() {
