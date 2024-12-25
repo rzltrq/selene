@@ -101,4 +101,4 @@ function animateFireworks() {
 }
 
 // Start the slideshow and effects
-
+startSlides();
