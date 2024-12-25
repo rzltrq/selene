@@ -39,8 +39,8 @@ function showSlide() {
         setTimeout(showSlide, 4000); // Switch slides every 4 seconds
     }
     else {
-        currentSlide = 0; // Reset for replay
         stopSlides();
+        currentSlide = 0; // Reset for replay
     }
 }
 
