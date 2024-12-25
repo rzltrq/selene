@@ -25,16 +25,11 @@ function showSlide() {
         if (currentSlide < slides.length) {
             setTimeout(showSlide, 4000); // Switch slides every 4 seconds
         } else {
-            // Stop after the last slide
-            stopEffects();
+            slides[currentSlide - 1].classList.add('active'); // Keep the last slide active
         }
     }
 }
 
-function stopEffects() {
-    // Optional: Stop audio or other animations if needed
-    console.log('Slides finished!');
-}
 
 // Replay slides functionality
 function replaySlides() {
