@@ -61,6 +61,7 @@ function generateBalloons() {
     for (let i = 0; i < 10; i++) {
         createBalloon();
     }
+    
     generateBalloons(); // Start generating balloons
     setInterval(createBalloon, 1000); // Continuously spawn balloons
 
