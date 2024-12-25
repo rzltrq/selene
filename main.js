@@ -27,8 +27,8 @@ function isBirthday() {
     const { daysLeft, hoursLeft, minutesLeft, secondsLeft } = calculateCountdown();
     if (daysLeft > 0 || hoursLeft > 0 || minutesLeft > 0 || secondsLeft > 0) {
         document.body.innerHTML = `<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(120deg, #ff9a9e, #fad0c4); color: white; text-align: center; font-family: Arial, sans-serif;">
-            <h1>🎉 It's Not Time Yet! 🎉</h1>
-            <p>Come back in <strong>${daysLeft}</strong> day${daysLeft !== 1 ? 's' : ''}, 
+            <h1>🎉 BELUM WAKTUNYA YEU KOCAK, MONYET! 🎉</h1>
+            <p>Balik lagi ntar setelah <strong>${daysLeft}</strong> day${daysLeft !== 1 ? 's' : ''}, 
             <strong>${hoursLeft}</strong> hour${hoursLeft !== 1 ? 's' : ''}, 
             <strong>${minutesLeft}</strong> minute${minutesLeft !== 1 ? 's' : ''}, and 
             <strong>${secondsLeft}</strong> second${secondsLeft !== 1 ? 's' : ''} to celebrate her birthday!</p>
