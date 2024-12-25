@@ -1,6 +1,5 @@
 const slides = document.querySelectorAll('.slide');
 const startButton = document.getElementByID('start-button');
-const replayButton = document.getElementByID('replay-button'); // Fixed this to correctly select the replay button
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
@@ -103,7 +102,3 @@ function animateFireworks() {
 
     requestAnimationFrame(animateFireworks); // Loop fireworks animation
 }
-// Event listener for replay button
-replayButton.addEventListener('click', () {
-    replaySlides(); 
-});
