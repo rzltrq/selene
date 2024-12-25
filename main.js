@@ -40,7 +40,7 @@ function showSlide() {
     }
     else {
         currentSlide = 0; // Reset for replay
-        stopSlides
+        stopSlides();
     }
 }
 
