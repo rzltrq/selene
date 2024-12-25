@@ -9,13 +9,12 @@ let balloons = [];
 const fireworksCtx = fireworksCanvas.getContext('2d');
 
 startButton.addEventListener('click', () => {
-    startButton.style.display = 'compact';
+    startButton.style.display = 'none';
     startSlides();
-    showSlide();
     audio.play();
     generateBalloons();
     launchFireworks();
-})
+});
 
 // Start slides and animations
 function startSlides() {
