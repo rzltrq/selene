@@ -178,5 +178,5 @@ function replaySlides() {
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
-    if () addCursorParticles();
+    if addCursorParticles();
 });
