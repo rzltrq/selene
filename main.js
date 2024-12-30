@@ -3,7 +3,7 @@ const slides = document.querySelectorAll('.slide');
 const balloonsContainer = document.getElementById('balloons');
 const fireworksCanvas = document.getElementById('fireworks');
 const audio = document.getElementById('bgMusic');
-const birthdayDate = new Date('2024-12-30T00:00:00'); // Set her birthday date with exact time (midnight)
+const birthdayDate = new Date('2024-12-31T00:00:00'); // Set her birthday date with exact time (midnight)
 const fireworksCtx = fireworksCanvas.getContext('2d');
 fireworksCanvas.width = window.innerWidth;
 fireworksCanvas.height = window.innerHeight;
@@ -147,7 +147,7 @@ function showSlide() {
     if (currentSlide < slides.length) {
         slides[currentSlide].classList.add('active');
         currentSlide++;
-        setTimeout(showSlide, 4000);
+        setTimeout(showSlide, 15000);
     } else {
         slides[currentSlide - 1].classList.add('active'); // Keep last slide active
     }
